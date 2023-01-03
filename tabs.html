@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tabs</title>
+    <style>
+        .tablinks {
+            cursor: pointer;
+        }
+
+        .tablinks:hover {
+            color: red;
+        }
+
+        .tablinks.active {
+            color: red;
+        }
+
+        .tabcontent {
+            display: none;
+        }
+
+        .tabcontent.ver {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="tab">
+        <div class="tablinks active">tab</div>
+        <div class="tablinks">tab</div>
+        <div class="tablinks">tab</div>
+    </div>
+    <div class="tabcontent ver">
+        <h3>titulo 1</h3>
+        <p>contenido 1</p>
+    </div>
+    <div class="tabcontent">
+        <h3>titulo 2</h3>
+        <p>contenido 2</p>
+    </div>
+    <div class="tabcontent">
+        <h3>titulo 3</h3>
+        <p>contenido 3</p>
+    </div>
+
+<script>
+    function tabsBeneficios(btnTabs, tabs) {
+    const d = document;
+    let $tabs = d.querySelectorAll(tabs),
+        $btnTabs = d.querySelectorAll(btnTabs);
+
+    for (let i = 0; i < $tabs.length; i++) {
+        let a = d.createAttribute('data-link');
+        $tabs[i].id = `tab${i}`;
+        a.value = `tab${i}`;
+        $btnTabs[i].setAttributeNode(a);
+    }
+
+    d.addEventListener('click', (e) =>{
+
+        if (e.target.matches(btnTabs)){
+            for (let i = 0; i < $tabs.length; i++) {
+                $btnTabs[i].classList.remove("active");
+                e.target.classList.add("active");  
+                $tabs[i].classList.remove("ver");
+                d.getElementById(e.target.getAttribute("data-link")).classList.add("ver");
+            }
+        }
+
+    });
+    }
+    tabsBeneficios(".tablinks", ".tabcontent");
+</script>
+</body>
+</html>
